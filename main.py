@@ -61,11 +61,11 @@ print("----------------End Order Details Data----------------")
 # STEP 8
 sum_total_price = pd.read_sql(
     """
-    SELECT ROUND(priceEach * quantityOrdered) AS total_price
+    SELECT SUM(ROUND(priceEach * quantityOrdered)) AS total_price
     FROM orderDetails
     """,
     conn,
-).sum()
+)["total_price"]
 
 # STEP 9
 df_day_month_year = pd.read_sql(
